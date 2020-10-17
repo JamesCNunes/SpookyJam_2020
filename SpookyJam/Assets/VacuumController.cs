@@ -6,10 +6,14 @@ public class VacuumController : MonoBehaviour
 {
     public Transform vacuumOrigin;
     public float suctionStrength = 4f;
+    public Collider col;
+
+    bool suck = false;
+    bool blow = false;
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Vacuumable"  && Input.GetMouseButton(0))
+        if(other.tag == "Vacuumable")
         {
             Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
             Debug.Log("Trig");
@@ -26,5 +30,16 @@ public class VacuumController : MonoBehaviour
             other.gameObject.GetComponent<Rigidbody>().useGravity = true;
         }
         
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            suck = true;
+        } else if (Input.GetMouseButtonUp(0))
+        {
+            suck = false;
+        }
     }
 }
