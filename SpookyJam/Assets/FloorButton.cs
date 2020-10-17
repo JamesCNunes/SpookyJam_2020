@@ -15,4 +15,9 @@ public class FloorButton : MonoBehaviour
         if (WhenUp == null)
             WhenUp = new UnityEvent();
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Test");
+    }
 }

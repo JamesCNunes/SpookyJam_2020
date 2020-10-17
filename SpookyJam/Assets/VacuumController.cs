@@ -29,7 +29,6 @@ public class VacuumController : MonoBehaviour
             {
                 Debug.Log("Sucking");
                 float dist = Vector3.Distance(holdPoint.position, other.transform.position);
-                Debug.Log(dist);
 
                 if (dist <= holdDist && !holding)
                 {
