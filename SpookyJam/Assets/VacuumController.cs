@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class VacuumController : MonoBehaviour
 {
@@ -12,10 +13,14 @@ public class VacuumController : MonoBehaviour
     public Collider col;
     GameObject heldObject;
 
+    public AudioSource main;
+    public AudioSource winMusic;
+
     bool suckEnabled = false;
     bool blowEnabled = false;
     bool holding = false;
     bool launchable = true;
+    bool endGame = false;
 
     public float cooldownTime = 1f;
     float cooldownLaunch;
@@ -27,8 +32,9 @@ public class VacuumController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Vacuumable" && launchable)
+        if((other.tag == "Vacuumable" || other.tag == "Goal") && launchable)
         {
+            Debug.Log("Trig");
             Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
             //if sucking
             if (suckEnabled)
@@ -36,7 +42,7 @@ public class VacuumController : MonoBehaviour
                // Debug.Log("Sucking");
                 float dist = Vector3.Distance(holdPoint.position, other.transform.position);
 
-                if (dist <= holdDist && !holding)
+                if (dist <= holdDist && !holding && other.tag != "Goal")
                 {
                     //Debug.Log("Now Held");
                     holding = true;
@@ -47,9 +53,20 @@ public class VacuumController : MonoBehaviour
                     rb.angularVelocity = Vector3.zero;
                     heldObject = other.gameObject;
                     rb.isKinematic = true;
-                  //  heldObject.GetComponent<Collider>().enabled = false;
+                    //  heldObject.GetComponent<Collider>().enabled = false;
                     return;
-                } else if (holding)
+                } else if (other.tag == "Goal" && dist <= holdDist && !holding)
+                {
+                    Destroy(other.gameObject);
+                    Debug.Log("Woohoo!");
+                    //play sfx
+                    main.mute = true;
+                    winMusic.Play();
+                    endGame = true;
+                    //wait for music to end
+                    //transition to next level
+                }
+                else if (holding)
                 {
                     return;
                 }
@@ -85,6 +102,12 @@ public class VacuumController : MonoBehaviour
 
     private void Update()
     {
+        if (endGame == true && !winMusic.isPlaying)
+        {
+            int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+            SceneManager.LoadScene(nextSceneIndex);
+        }
+
         if (!launchable && cooldownLaunch > 0)
         {
             cooldownLaunch -= Time.deltaTime;
