@@ -17,7 +17,7 @@ public class SpawnOrigin : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("P_hit: " + rb.velocity.magnitude);
+
         if(rb.velocity.magnitude >= splatSpeed)
         {
             source.Play();

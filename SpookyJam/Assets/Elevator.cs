@@ -40,13 +40,13 @@ public class Elevator : MonoBehaviour
         
         if (resting)
         {
-            Debug.Log("Resting");
+           // Debug.Log("Resting");
             return;
         }
 
         if (movingForward)
         {
-            Debug.Log("Forward");
+            //Debug.Log("Forward");
             //Debug.Log("Elev: " + elevator.localPosition + " To Pos: " + position2.localPosition);
             if (elevator.localPosition == position2.localPosition)
             {
@@ -63,7 +63,7 @@ public class Elevator : MonoBehaviour
         }
         else if (movingBackward)
         {
-            Debug.Log("Backward");
+            //Debug.Log("Backward");
             if (position1.localPosition == elevator.localPosition)
             {
                 resting = true;
