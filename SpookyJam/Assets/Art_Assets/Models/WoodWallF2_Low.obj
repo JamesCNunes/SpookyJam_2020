@@ -1,0 +1,20 @@
+# This file uses centimeters as units for non-parametric coordinates.
+
+mtllib WoodWallF2_Low.mtl
+g default
+v -1.000000 0.000000 0.015000
+v 1.000000 0.000000 0.015000
+v -1.000000 1.939122 0.015000
+v 1.000000 1.939122 0.015000
+vt 0.010726 -0.010112
+vt 0.803500 -0.010160
+vt 0.803547 0.758483
+vt 0.010772 0.758531
+vn 0.000000 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+s off
+g WoodFloor_Low1:polySurface4 WoodWall_Low:pCube6
+usemtl initialShadingGroup
+f 1/1/1 2/2/2 4/3/3 3/4/4
