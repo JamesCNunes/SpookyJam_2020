@@ -33,12 +33,12 @@ public class VacuumController : MonoBehaviour
             //if sucking
             if (suckEnabled)
             {
-                Debug.Log("Sucking");
+               // Debug.Log("Sucking");
                 float dist = Vector3.Distance(holdPoint.position, other.transform.position);
 
                 if (dist <= holdDist && !holding)
                 {
-                    Debug.Log("Now Held");
+                    //Debug.Log("Now Held");
                     holding = true;
                     rb.useGravity = false;
                     other.transform.position = holdPoint.position;
@@ -46,6 +46,8 @@ public class VacuumController : MonoBehaviour
                     rb.velocity = Vector3.zero;
                     rb.angularVelocity = Vector3.zero;
                     heldObject = other.gameObject;
+                    rb.isKinematic = true;
+                  //  heldObject.GetComponent<Collider>().enabled = false;
                     return;
                 } else if (holding)
                 {
@@ -58,9 +60,10 @@ public class VacuumController : MonoBehaviour
             }
             else if (blowEnabled)
             {
-                Debug.Log("Blowing");
+                //Debug.Log("Blowing");
                 Vector3 direction = other.transform.position - vacuumOrigin.position;
                 rb.useGravity = false;
+                rb.isKinematic = false;
                 rb.AddForce(direction.normalized * suctionStrength);
             }
             else {
@@ -89,7 +92,7 @@ public class VacuumController : MonoBehaviour
         } else if (!launchable && cooldownLaunch <= 0)
         {
             launchable = true;
-            Debug.Log("Launch Enable");
+            //Debug.Log("Launch Enable");
             cooldownLaunch = cooldownTime;
         }
 
@@ -105,6 +108,7 @@ public class VacuumController : MonoBehaviour
                 holding = false;
                 heldObject.transform.parent = null;
                 heldObject.GetComponent<Rigidbody>().useGravity = true;
+                heldObject.GetComponent<Rigidbody>().isKinematic = false;
             }
         }
 
@@ -124,7 +128,9 @@ public class VacuumController : MonoBehaviour
         } 
         else if (Input.GetMouseButtonUp(1) && !suckEnabled)
         {
+
             blowEnabled = false;
+            
         }
     }
 }

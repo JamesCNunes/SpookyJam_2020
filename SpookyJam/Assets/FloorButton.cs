@@ -20,6 +20,7 @@ public class FloorButton : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("collide");
         if (isUp)
         {
             Debug.Log("Activated");
@@ -29,13 +30,15 @@ public class FloorButton : MonoBehaviour
         
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnCollisionExit(Collision collision)
     {
+        Debug.Log("Remove");
         if (!isUp)
         {
             isUp = true;
             WhenUp.Invoke();
         }
     }
+
 
 }
