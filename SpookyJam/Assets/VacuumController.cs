@@ -124,6 +124,7 @@ public class VacuumController : MonoBehaviour
             launchable = false;
             heldObject.transform.parent = null;
             heldObject.GetComponent<Rigidbody>().useGravity = true;
+            heldObject.GetComponent<Rigidbody>().isKinematic = false;
             heldObject.GetComponent<Rigidbody>().AddForce((holdPoint.position - vacuumOrigin.position) * launchStrength, ForceMode.Impulse);
         } 
         else if (Input.GetMouseButtonUp(1) && !suckEnabled)
