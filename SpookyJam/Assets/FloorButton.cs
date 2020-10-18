@@ -8,6 +8,8 @@ public class FloorButton : MonoBehaviour
     public UnityEvent WhenDown;
     public UnityEvent WhenUp;
 
+    bool isUp = true;
+
     void Awake()
     {
         if (WhenDown == null)
@@ -18,6 +20,21 @@ public class FloorButton : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Test");
+        if (isUp)
+        {
+            isUp = false;
+            WhenDown.Invoke();
+        }
+        
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!isUp)
+        {
+            isUp = true;
+            WhenUp.Invoke();
+        }
+    }
+
 }
