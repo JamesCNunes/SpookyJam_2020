@@ -89,6 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7494663564347223363}
   - component: {fileID: -2143358669816053339}
+  - component: {fileID: 745681021190638140}
   m_Layer: 0
   m_Name: WallPaperCenter
   m_TagString: Untagged
@@ -150,3 +151,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &745681021190638140
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7154447812787894265}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}

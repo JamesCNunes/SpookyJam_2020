@@ -89,6 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7224548163261379286}
   - component: {fileID: -7135957089381151120}
+  - component: {fileID: 6451154637930493743}
   m_Layer: 0
   m_Name: WallPaperRight
   m_TagString: Untagged
@@ -150,3 +151,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &6451154637930493743
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8000944812076656748}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}

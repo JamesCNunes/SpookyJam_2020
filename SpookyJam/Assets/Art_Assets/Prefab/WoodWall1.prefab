@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4280176791670429578}
   - component: {fileID: 4128067894055708746}
+  - component: {fileID: -5582150167538135320}
   m_Layer: 0
   m_Name: WoodWall1
   m_TagString: Untagged
@@ -71,6 +72,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &-5582150167538135320
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471693335000993072}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &4832242699888763089
 GameObject:
   m_ObjectHideFlags: 0
