@@ -22,6 +22,7 @@ public class FloorButton : MonoBehaviour
     {
         if (isUp)
         {
+            Debug.Log("Activated");
             isUp = false;
             WhenDown.Invoke();
         }

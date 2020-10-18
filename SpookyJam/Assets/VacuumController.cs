@@ -15,13 +15,19 @@ public class VacuumController : MonoBehaviour
     bool suckEnabled = false;
     bool blowEnabled = false;
     bool holding = false;
+    bool launchable = true;
 
     public float cooldownTime = 1f;
     float cooldownLaunch;
 
+    private void Start()
+    {
+        cooldownLaunch = cooldownTime;
+    }
+
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Vacuumable")
+        if(other.tag == "Vacuumable" && launchable)
         {
             Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
             //if sucking
@@ -69,13 +75,24 @@ public class VacuumController : MonoBehaviour
     {
         if(other.tag == "Vacuumable")
         {
-            //other.gameObject.GetComponent<Rigidbody>().useGravity = true;
+            other.gameObject.GetComponent<Rigidbody>().useGravity = true;
         }
         
     }
 
     private void Update()
     {
+        if (!launchable && cooldownLaunch > 0)
+        {
+            cooldownLaunch -= Time.deltaTime;
+            return;
+        } else if (!launchable && cooldownLaunch <= 0)
+        {
+            launchable = true;
+            Debug.Log("Launch Enable");
+            cooldownLaunch = cooldownTime;
+        }
+
         if (Input.GetMouseButton(0) && !blowEnabled)
         {
             suckEnabled = true;
@@ -97,9 +114,10 @@ public class VacuumController : MonoBehaviour
         } 
         else if (Input.GetMouseButton(1) && suckEnabled && holding)
         {
-            blowEnabled = true;
+            blowEnabled = false;
             suckEnabled = false;
             holding = false;
+            launchable = false;
             heldObject.transform.parent = null;
             heldObject.GetComponent<Rigidbody>().useGravity = true;
             heldObject.GetComponent<Rigidbody>().AddForce((holdPoint.position - vacuumOrigin.position) * launchStrength, ForceMode.Impulse);
