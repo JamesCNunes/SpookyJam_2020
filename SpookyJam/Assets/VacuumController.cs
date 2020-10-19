@@ -139,6 +139,7 @@ public class VacuumController : MonoBehaviour
         {
             
             suckEnabled = false;
+            VacSFX.Pause();
             SuckPFX.SetActive(false);
 
             if (holding)
@@ -153,6 +154,8 @@ public class VacuumController : MonoBehaviour
         if (Input.GetMouseButton(1) && !suckEnabled)
         {
             BlowPFX.SetActive(true);
+            VacSFX.clip = blowSound;
+            VacSFX.Play();
             blowEnabled = true;
         } 
         else if (Input.GetMouseButton(1) && suckEnabled && holding)
@@ -161,6 +164,7 @@ public class VacuumController : MonoBehaviour
             suckEnabled = false;
             SuckPFX.SetActive(false);
             BlowPFX.SetActive(false);
+            VacSFX.Pause();
             holding = false;
             launchable = false;
             heldObject.transform.parent = null;
@@ -171,6 +175,7 @@ public class VacuumController : MonoBehaviour
         else if (Input.GetMouseButtonUp(1) && !suckEnabled)
         {
             BlowPFX.SetActive(false);
+            VacSFX.Pause();
             blowEnabled = false;
             
         }

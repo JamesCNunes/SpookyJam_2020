@@ -737,6 +737,18 @@ PrefabInstance:
       propertyPath: main
       value: 
       objectReference: {fileID: 1405978768}
+    - target: {fileID: 1039538437, guid: 6bc84fbfe40d4a44a85f1ed9c5a6aa09, type: 3}
+      propertyPath: VacSFX
+      value: 
+      objectReference: {fileID: 1413976142}
+    - target: {fileID: 1039538437, guid: 6bc84fbfe40d4a44a85f1ed9c5a6aa09, type: 3}
+      propertyPath: blowSound
+      value: 
+      objectReference: {fileID: 8300000, guid: d30fb7c688efd2b41abb6d38dcd7fa9a, type: 3}
+    - target: {fileID: 1039538437, guid: 6bc84fbfe40d4a44a85f1ed9c5a6aa09, type: 3}
+      propertyPath: suckSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 0f4b12af242c08744b04a732369f065f, type: 3}
     - target: {fileID: 6644219945668457868, guid: 6bc84fbfe40d4a44a85f1ed9c5a6aa09,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -984,7 +996,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1152539360}
   m_PrefabAsset: {fileID: 0}
---- !u!82 &1413976137
+--- !u!82 &1413976142
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -996,7 +1008,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.057
   m_Pitch: 1
   Loop: 1
   Mute: 0
