@@ -15,6 +15,14 @@ public class VacuumController : MonoBehaviour
 
     public AudioSource main;
     public AudioSource winMusic;
+    public AudioSource VacSFX;
+
+    public AudioClip blowSound;
+    public AudioClip suckSound;
+
+    public GameObject BlowPFX;
+    public GameObject SuckPFX;
+
 
     bool suckEnabled = false;
     bool blowEnabled = false;
@@ -78,6 +86,7 @@ public class VacuumController : MonoBehaviour
             else if (blowEnabled)
             {
                 //Debug.Log("Blowing");
+                
                 Vector3 direction = other.transform.position - vacuumOrigin.position;
                 rb.useGravity = false;
                 rb.isKinematic = false;
@@ -121,10 +130,16 @@ public class VacuumController : MonoBehaviour
 
         if (Input.GetMouseButton(0) && !blowEnabled)
         {
+            
             suckEnabled = true;
+            VacSFX.clip = suckSound;
+            VacSFX.Play();
+            SuckPFX.SetActive(true);
         } else if (Input.GetMouseButtonUp(0) && !blowEnabled)
         {
+            
             suckEnabled = false;
+            SuckPFX.SetActive(false);
 
             if (holding)
             {
@@ -137,12 +152,15 @@ public class VacuumController : MonoBehaviour
 
         if (Input.GetMouseButton(1) && !suckEnabled)
         {
+            BlowPFX.SetActive(true);
             blowEnabled = true;
         } 
         else if (Input.GetMouseButton(1) && suckEnabled && holding)
         {
             blowEnabled = false;
             suckEnabled = false;
+            SuckPFX.SetActive(false);
+            BlowPFX.SetActive(false);
             holding = false;
             launchable = false;
             heldObject.transform.parent = null;
@@ -152,7 +170,7 @@ public class VacuumController : MonoBehaviour
         } 
         else if (Input.GetMouseButtonUp(1) && !suckEnabled)
         {
-
+            BlowPFX.SetActive(false);
             blowEnabled = false;
             
         }
