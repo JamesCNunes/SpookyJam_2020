@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class VacuumController : MonoBehaviour
@@ -24,6 +25,13 @@ public class VacuumController : MonoBehaviour
     public GameObject BlowPFX;
     public GameObject SuckPFX;
 
+    public Image symbol;
+
+    public Sprite neutral;
+    public Sprite blowUI;
+    public Sprite suckUI;
+    public Sprite blocked;
+
 
     bool suckEnabled = false;
     bool blowEnabled = false;
@@ -37,6 +45,7 @@ public class VacuumController : MonoBehaviour
     private void Start()
     {
         cooldownLaunch = cooldownTime;
+        symbol.sprite = neutral;
     }
 
     private void OnTriggerStay(Collider other)
@@ -125,6 +134,7 @@ public class VacuumController : MonoBehaviour
         } else if (!launchable && cooldownLaunch <= 0)
         {
             launchable = true;
+            symbol.sprite = neutral;
             //Debug.Log("Launch Enable");
             cooldownLaunch = cooldownTime;
         }
@@ -139,12 +149,13 @@ public class VacuumController : MonoBehaviour
                 VacSFX.clip = suckSound;
                 VacSFX.Play();
             }
-            
+            symbol.sprite = suckUI;
             SuckPFX.SetActive(true);
         } else if (Input.GetMouseButtonUp(0) && !blowEnabled)
         {
             
             suckEnabled = false;
+            symbol.sprite = neutral;
 
             if (VacSFX.isPlaying)
             {
@@ -172,14 +183,16 @@ public class VacuumController : MonoBehaviour
                 Debug.Log("sound change");
                 VacSFX.clip = blowSound;
                 VacSFX.Play();
-                blowEnabled = true;
+                
             }
-            
+            blowEnabled = true;
+            symbol.sprite = blowUI;
         } 
         else if (Input.GetMouseButton(1) && suckEnabled && holding)
         {
             blowEnabled = false;
             suckEnabled = false;
+            symbol.sprite = blocked;
             SuckPFX.SetActive(false);
             BlowPFX.SetActive(false);
             if (VacSFX.isPlaying)
