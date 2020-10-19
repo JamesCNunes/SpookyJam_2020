@@ -16,6 +16,7 @@ public class VacuumController : MonoBehaviour
     public AudioSource main;
     public AudioSource winMusic;
     public AudioSource VacSFX;
+    public AudioSource Fwoosh;
 
     public AudioClip blowSound;
     public AudioClip suckSound;
@@ -132,14 +133,25 @@ public class VacuumController : MonoBehaviour
         {
             
             suckEnabled = true;
-            VacSFX.clip = suckSound;
-            VacSFX.Play();
+            if (!VacSFX.isPlaying)
+            {
+                Debug.Log("sound change");
+                VacSFX.clip = suckSound;
+                VacSFX.Play();
+            }
+            
             SuckPFX.SetActive(true);
         } else if (Input.GetMouseButtonUp(0) && !blowEnabled)
         {
             
             suckEnabled = false;
-            VacSFX.Pause();
+
+            if (VacSFX.isPlaying)
+            {
+                Debug.Log("sound off");
+                VacSFX.Pause();
+            }
+            
             SuckPFX.SetActive(false);
 
             if (holding)
@@ -154,9 +166,15 @@ public class VacuumController : MonoBehaviour
         if (Input.GetMouseButton(1) && !suckEnabled)
         {
             BlowPFX.SetActive(true);
-            VacSFX.clip = blowSound;
-            VacSFX.Play();
-            blowEnabled = true;
+
+            if (!VacSFX.isPlaying)
+            {
+                Debug.Log("sound change");
+                VacSFX.clip = blowSound;
+                VacSFX.Play();
+                blowEnabled = true;
+            }
+            
         } 
         else if (Input.GetMouseButton(1) && suckEnabled && holding)
         {
@@ -164,7 +182,13 @@ public class VacuumController : MonoBehaviour
             suckEnabled = false;
             SuckPFX.SetActive(false);
             BlowPFX.SetActive(false);
-            VacSFX.Pause();
+            if (VacSFX.isPlaying)
+            {
+                Debug.Log("sound pause");
+                VacSFX.Pause();
+            }
+
+            Fwoosh.Play();
             holding = false;
             launchable = false;
             heldObject.transform.parent = null;
@@ -175,7 +199,12 @@ public class VacuumController : MonoBehaviour
         else if (Input.GetMouseButtonUp(1) && !suckEnabled)
         {
             BlowPFX.SetActive(false);
-            VacSFX.Pause();
+            if (VacSFX.isPlaying)
+            {
+                Debug.Log("sound pause");
+                VacSFX.Pause();
+            }
+            
             blowEnabled = false;
             
         }
