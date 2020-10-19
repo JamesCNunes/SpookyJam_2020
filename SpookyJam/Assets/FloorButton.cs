@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class FloorButton : MonoBehaviour
 {
+
+
     public UnityEvent WhenDown;
     public UnityEvent WhenUp;
 
@@ -23,6 +25,7 @@ public class FloorButton : MonoBehaviour
         Debug.Log("collide");
         if (isUp)
         {
+            //anim.SetTrigger("TriggerPressDown");
             Debug.Log("Activated");
             isUp = false;
             WhenDown.Invoke();
@@ -35,10 +38,13 @@ public class FloorButton : MonoBehaviour
         Debug.Log("Remove");
         if (!isUp)
         {
+            //anim.SetTrigger("TriggerUp");
             isUp = true;
             WhenUp.Invoke();
         }
     }
+
+
 
 
 }
